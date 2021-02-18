@@ -15,4 +15,4 @@ This project leverages a few bits of infrastructure to operate.
 
 ### Infrastructure
 
-The goal of this repository is to help a security researcher that leverages GitHub Security Advisories provide regular notifications about an impending disclosure to 
+The goal of this repository is to help a security researcher that leverages GitHub Security Advisories provide regular notifications about an impending disclosure to the organization with the vulnerable component.
