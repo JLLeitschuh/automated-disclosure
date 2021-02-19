@@ -10,7 +10,7 @@ In particular, enforcing a consistent disclosure policy in a way that is automat
 After lots of time spent dealing with disclosures on HackerOne, BugCrowd, Email, GitHub Security Advisories, Jira, ect... I've finally gotten tired of having to manually keep track of the disclosure deadlines for each respective outstanding report. In my experience, the user experience around GitHub Security Advisories is the most researcher friendly and, with a few bits of automation, the perfect platform for performing  vulnerability disclosure.
 
 This project leverages a few bits of infrastructure to operate.
- - A GitHub account dedicated as a disclosure bot. (eg. `JLLeitschuh-disclosure-bot`)
+ - A GitHub account dedicated as a disclosure bot. (eg. [@JLLeitschuh-disclosure-bot](https://github.com/JLLeitschuh-disclosure-bot))
  - A GitHub Repository for disclosures (eg. https://github.com/JLLeitschuh/security-research)
 
 ### Infrastructure
