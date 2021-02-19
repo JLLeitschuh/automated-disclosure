@@ -9,7 +9,7 @@ class GitHubSecurityAdvisoriesSeleniumDriver(
     private val fluentStandalone: FluentStandalone
 ) : AutoCloseable {
 
-    fun login(username: String, password: String) {
+    fun login(username: String, password: String, twoFactorSecret: String) {
         val loginPage = goTo(GitHubLoginPage())
         loginPage.loginField.write(username)
         loginPage.passwordField.write(password)

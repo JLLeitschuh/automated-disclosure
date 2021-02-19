@@ -6,15 +6,19 @@ package org.jlleitschuh.disclosure.automated.app
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.required
 import org.jlleitschuh.disclosure.automated.driver.selenium.GitHubSecurityAdvisoriesSeleniumDriver
-import com.github.ajalt.clikt.parameters.options.option as option1
+import com.github.ajalt.clikt.parameters.options.option
 
 class AutomatedDisclosure : CliktCommand() {
-    private val username: String by option1(help = "GitHub Username", envvar = "GIT_HUB_USERNAME").required()
-    private val password: String by option1(help = "GitHub Password", envvar = "GIT_HUB_PASSWORD").required()
+    private val username: String by option(help = "GitHub Username", envvar = "GIT_HUB_USERNAME").required()
+    private val password: String by option(help = "GitHub Password", envvar = "GIT_HUB_PASSWORD").required()
+    private val twoFactorSecret: String by option(
+        help = "GitHub Two Factor Secret. This is not a one-time secret. This is the secret seed value for the OTP generator.",
+        envvar = "GIT_HUB_TWO_FACTOR_CODE"
+    ).required()
 
     override fun run() {
         GitHubSecurityAdvisoriesSeleniumDriver.create().use {
-            it.login(username, password)
+            it.login(username, password, twoFactorSecret)
         }
     }
 }
