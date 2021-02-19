@@ -11,6 +11,7 @@ After lots of time spent dealing with disclosures on HackerOne, BugCrowd, Email,
 
 This project leverages a few bits of infrastructure to operate.
  - A GitHub account dedicated as a disclosure bot. (eg. [@JLLeitschuh-disclosure-bot](https://github.com/JLLeitschuh-disclosure-bot))
+   - This account must have 2FA setup using OTP. This bot will be interfacing with security advisories. 2FA is requited on this account.
  - A GitHub Repository for disclosures (eg. https://github.com/JLLeitschuh/security-research)
 
 ### Infrastructure
