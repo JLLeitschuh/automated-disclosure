@@ -3,17 +3,17 @@ package org.jlleitschuh.disclosure.automated.driver.selenium
 import org.fluentlenium.adapter.FluentStandalone
 import org.fluentlenium.core.FluentPage
 import org.jlleitschuh.disclosure.automated.driver.selenium.page.GitHubLoginPage
-import org.openqa.selenium.support.PageFactory
 import java.util.concurrent.TimeUnit
 
 class GitHubSecurityAdvisoriesSeleniumDriver(
     private val fluentStandalone: FluentStandalone
 ) : AutoCloseable {
 
-    fun login() {
+    fun login(username: String, password: String) {
         val loginPage = goTo(GitHubLoginPage())
-        loginPage.loginField.write("test")
-        loginPage.passwordField.write("test")
+        loginPage.loginField.write(username)
+        loginPage.passwordField.write(password)
+        loginPage.submitButton.click()
     }
 
     private fun <P : FluentPage> goTo(page: P): P {
