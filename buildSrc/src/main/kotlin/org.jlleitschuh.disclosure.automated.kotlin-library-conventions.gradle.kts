@@ -13,5 +13,6 @@ plugins {
 dependencies {
     constraints {
         implementation("org.fluentlenium:fluentlenium-core:4.6.1")
+        implementation("com.j256.two-factor-auth:two-factor-auth:1.3")
     }
 }

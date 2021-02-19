@@ -5,14 +5,11 @@ import org.fluentlenium.core.annotation.PageUrl
 import org.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.support.FindBy
 
-@PageUrl("https://github.com/login")
-class GitHubLoginPage : FluentPage() {
-    @field:FindBy(id = "login_field")
-    lateinit var loginField: FluentWebElement
+@PageUrl("https://github.com/sessions/two-factor")
+class GitHubTwoFactorPromptPage : FluentPage() {
+    @field:FindBy(id = "otp")
+    lateinit var otpField: FluentWebElement
 
-    @field:FindBy(id = "password")
-    lateinit var passwordField: FluentWebElement
-
-    @field:FindBy(name = "commit")
+    @field:FindBy(css = "button.btn-primary")
     lateinit var submitButton: FluentWebElement
 }

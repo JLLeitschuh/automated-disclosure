@@ -1,39 +1,30 @@
 package org.jlleitschuh.disclosure.automated.driver.selenium
 
-import org.fluentlenium.adapter.FluentStandalone
-import org.fluentlenium.core.FluentPage
+import com.j256.twofactorauth.TimeBasedOneTimePasswordUtil
 import org.jlleitschuh.disclosure.automated.driver.selenium.page.GitHubLoginPage
-import java.util.concurrent.TimeUnit
+import org.jlleitschuh.disclosure.automated.driver.selenium.page.GitHubTwoFactorPromptPage
 
 class GitHubSecurityAdvisoriesSeleniumDriver(
-    private val fluentStandalone: FluentStandalone
+    private val pageDriver: FluentPageDriver
 ) : AutoCloseable {
 
     fun login(username: String, password: String, twoFactorSecret: String) {
-        val loginPage = goTo(GitHubLoginPage())
+        val loginPage = pageDriver.goTo(GitHubLoginPage())
         loginPage.loginField.write(username)
         loginPage.passwordField.write(password)
         loginPage.submitButton.click()
-    }
-
-    private fun <P : FluentPage> goTo(page: P): P {
-        page.initFluent(fluentStandalone.fluentControl)
-        val atPage = fluentStandalone.goTo(page)
-        fluentStandalone.await().atMost(5, TimeUnit.SECONDS).untilPage(page).isAt
-        fluentStandalone.inject(page)
-        return atPage
+        val twoFactorPage = pageDriver.at(GitHubTwoFactorPromptPage())
+        twoFactorPage.otpField.write(TimeBasedOneTimePasswordUtil.generateCurrentNumberString(twoFactorSecret))
+        twoFactorPage.submitButton.click()
     }
 
     override fun close() {
-        fluentStandalone.quit()
+        pageDriver.close()
     }
 
     companion object {
         fun create(): GitHubSecurityAdvisoriesSeleniumDriver {
-            val fluentStandalone = FluentStandalone()
-            fluentStandalone.webDriver = "chrome"
-            fluentStandalone.init()
-            return GitHubSecurityAdvisoriesSeleniumDriver(fluentStandalone)
+            return GitHubSecurityAdvisoriesSeleniumDriver(FluentPageDriver.create())
         }
     }
 }
